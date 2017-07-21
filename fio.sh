@@ -693,10 +693,10 @@ for job in $jobs; do # {
          echo $cmd
          [[ $EVAL -eq 1 ]] && eval $cmd
   elif [ $job ==  "readrand" ] ; then
-		for READSIZE in `eval echo $READSIZES` ; do 
+		for READSIZE1 in `eval echo $READSIZES` ; do 
 			for USERS in `eval echo $MULTIUSERS` ; do 
 			#echo "j: $USERS"
-			PREFIX="$OUTPUT/${job}_u${USERS}_kb0008"
+			PREFIX="$OUTPUT/${job}_u${USERS}_kb{READSIZE1}"
 			JOBFILE=${PREFIX}.job
 			# init creates the shared job file potion
 			init
