@@ -693,26 +693,28 @@ for job in $jobs; do # {
          echo $cmd
          [[ $EVAL -eq 1 ]] && eval $cmd
   elif [ $job ==  "readrand" ] ; then
-       for USERS in `eval echo $MULTIUSERS` ; do 
-         #echo "j: $USERS"
-         PREFIX="$OUTPUT/${job}_u${USERS}_kb0008"
-         JOBFILE=${PREFIX}.job
-         # init creates the shared job file potion
-         init
-         # for random read, offsets shouldn't be needed
-         # offsets
-         OFFSET=0
-         loops=1
-         NUSERS=`echo $USERS | sed -e 's/^00*//'`
-         while [[ $loops -le $NUSERS ]] ; do
-            JOBNUMBER=$loops
-            eval $jobs
-            loops=$(expr $loops + 1)
-         done
-         cmd="$DTRACE1 $BINARY $JOBFILE $DTRACE2> ${PREFIX}.out"
-         echo $cmd
-         [[ $EVAL -eq 1 ]] && eval $cmd
-       done
+		for READSIZE in `eval echo $READSIZES` ; do 
+			for USERS in `eval echo $MULTIUSERS` ; do 
+			#echo "j: $USERS"
+			PREFIX="$OUTPUT/${job}_u${USERS}_kb0008"
+			JOBFILE=${PREFIX}.job
+			# init creates the shared job file potion
+			init
+			# for random read, offsets shouldn't be needed
+			# offsets
+			OFFSET=0
+			loops=1
+			NUSERS=`echo $USERS | sed -e 's/^00*//'`
+			while [[ $loops -le $NUSERS ]] ; do
+				JOBNUMBER=$loops
+				eval $jobs
+				loops=$(expr $loops + 1)
+			done
+			cmd="$DTRACE1 $BINARY $JOBFILE $DTRACE2> ${PREFIX}.out"
+			echo $cmd
+			[[ $EVAL -eq 1 ]] && eval $cmd
+			done
+	   done
   # redo test : 1k, 4k, 8k, 128k, 1024k by 1 user 
   elif [ $job ==  "write" ] ; then
        for WRITESIZE in `eval echo $WRITESIZES` ; do 
