@@ -637,7 +637,7 @@ for i in 1 ; do
 cat << EOF
 [job$JOBNUMBER]
 rw=randread
-bs=8k
+bs=${READSIZE1}k
 numjobs=1
 offset=$OFFSET
 EOF
@@ -666,6 +666,7 @@ for job in $jobs; do # {
   USERS=1
   WRITESIZE=008
   READSIZE=008
+  READSIZE1=008
   # followng executes when it's a custom test
   if [ $CUSTOMUSERS -gt 0 ] || [ $CUSTOMBLOCKSIZE -gt 0 ] ; then
          echo "CUSTOM, users:$CUSTOMUSERS: blocksize:$CUSTOMBLOCKSIZE" 
