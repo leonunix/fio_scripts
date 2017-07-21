@@ -697,7 +697,7 @@ for job in $jobs; do # {
 		for READSIZE1 in `eval echo $READSIZES` ; do 
 			for USERS in `eval echo $MULTIUSERS` ; do 
 			#echo "j: $USERS"
-			PREFIX="$OUTPUT/${job}_u${USERS}_kb{READSIZE1}"
+			PREFIX="$OUTPUT/${job}_u${USERS}_kb${READSIZE1}"
 			JOBFILE=${PREFIX}.job
 			# init creates the shared job file potion
 			init
